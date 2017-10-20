@@ -28,29 +28,28 @@ class RPN:
             if str == "+":
                 result = self.stack.Pop() + self.stack.Pop()
                 self.stack.Push(result)
-                self.result(result)
+                self.result()
             elif str == "-":
                 top = self.stack.Pop()
                 beneath = self.stack.Pop()
                 result = beneath - top
                 self.stack.Push(result)
-                self.result(result)
+                self.result()
             elif str == "*":
                 result = self.stack.Pop() * self.stack.Pop()
                 self.stack.Push(result)
-                self.result(result)
+                self.result()
             elif str == "/":
                 result = self.stack.Pop() / self.stack.Pop()
                 self.stack.Push(result)
-                self.result(result)
+                self.result()
 
-    def result(self, val):
-        print(f"={val}")
+    def result(self):
+        print(f"={self.stack.Top()}")
 
 
 rpn = RPN()
 
 print("RPN Calculator:")
-print("***************")
 while True:
     rpn.process(input(">"))
