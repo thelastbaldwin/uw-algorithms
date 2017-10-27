@@ -37,7 +37,7 @@ class RPN:
                 self.stack.Push(result)
                 self.result()
             elif str == "*":
-                result = benath * top
+                result = beneath * top
                 self.stack.Push(result)
                 self.result()
             elif str == "/":
