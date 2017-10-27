@@ -16,6 +16,8 @@ class Queue:
     self.count = self.count + 1
 
   def Dequeue(self):
+    if self.count == 0:
+      raise IndexError
     frontVal = self.array[self.head]
     self.head = self.head + 1
     if(self.head > len(self.array) - 1):
