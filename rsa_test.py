@@ -1,5 +1,13 @@
 import math
 
+def isPrime(number):
+    if number < 1:
+        return False
+    for i in range(2, number):
+        if (number % i == 0):
+            return False
+    return True
+
 def getLargest(list):
     return list[-1]
 
@@ -56,20 +64,46 @@ def decryptMessage(message, d, mod):
 
     return "".join(decryptedMessage)
 
-p = 31
-q = 53
+def getPrimeInput(name):
+    p = None
 
-# significantly faster with smaller numbers
-# p = 17
-# q = 29
+    while p is None or isPrime(p) != True:
+        p = int(input("Enter a prime number for {}: ".format(name)))
+        if isPrime(p) != True:
+            print("{} is not prime".format(p))
+    return p
+
+def outputValue(name, value):
+    print("{} = {}".format(name, value))
+
+def bar(length):
+    return("*" * length)
+
+lineLength = 30
+print(bar(lineLength))
+print("RSA Encryption Demo:")
+print(bar(lineLength))
+
+# while this works with smaller numbers it's best if these are > 11
+p = getPrimeInput("p")
+q = getPrimeInput("q")
+
 mod = getMod(p, q)
 totient = phi(p, q)
 e = getLargest(getCoprimes(totient))
 d = getLargest(getDValues(e, totient, e * 200))
-# print(e)
-# print(d)
 
-message = "Violet Beauregarde"
+print(bar(lineLength))
+print("Values for this example:")
+outputValue("p", p)
+outputValue("q", q)
+outputValue("mod", mod)
+outputValue("totient", totient)
+outputValue("e (largest)", e)
+outputValue("d (largest)", d)
+print(bar(lineLength))
+
+message = input("Enter your message to be encrypted: ")
 secretMessage = encryptMessage(message, e, mod)
 decryptedMessage = decryptMessage(secretMessage, d, mod)
 print("Original Message: {}".format(message))
